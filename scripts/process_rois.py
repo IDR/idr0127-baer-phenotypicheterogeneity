@@ -9,9 +9,7 @@ import re
 
 # Generate circle/ellipse ROIs from the csv files.
 # Run it like this:
-# find /uod/idr/metadata/idr0127-baer-phenotypicheterogeneity/FeatureLevelData/1_Patient_TL -type f -exec python process_rois.py 2251
-# find /uod/idr/metadata/idr0127-baer-phenotypicheterogeneity/FeatureLevelData/2_Patient_EP -type f -exec python process_rois.py 2251
-# find /uod/idr/metadata/idr0127-baer-phenotypicheterogeneity/FeatureLevelData/3_Exponential_TL -type f -exec python process_rois.py 2251
+# find /uod/idr/metadata/idr0127-baer-phenotypicheterogeneity/FeatureLevelData -type f -exec python process_rois.py [PROJECT_ID] {} \;
 
 if len(sys.argv) < 2:
     print("Usage: python process_rois.py [PROJECT_ID] [CSV_FILE]")
