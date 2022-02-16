@@ -22,9 +22,9 @@ def read_csv(filename, frame=-1):
         csv_reader = csv.DictReader(csv_file)
         rows = list(csv_reader)
         for r in rows:
-            if frame !=-1 && frame == r['Frame']:
-            coords[r['Colony']].append(
-                (r['Frame'],r['X_centerPx'],r['Y_centerPx'],r['RadiusPx']))
+            if frame !=-1 and frame == r['Frame']:
+                coords[r['Colony']].append(
+                    (r['Frame'],r['X_centerPx'],r['Y_centerPx'],r['RadiusPx']))
     return coords
 
 
