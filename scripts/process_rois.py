@@ -18,6 +18,7 @@ log = logging.getLogger()
 
 def read_csv(filename, frame=-1):
     coords = defaultdict(list)
+    pixelsize = None
     with open(filename, mode='r') as csv_file:
         csv_reader = csv.DictReader(csv_file)
         rows = list(csv_reader)
@@ -25,7 +26,11 @@ def read_csv(filename, frame=-1):
             if frame !=-1 and frame == r['Frame']:
                 coords[r['Colony']].append(
                     (r['Frame'],r['X_centerPx'],r['Y_centerPx'],r['RadiusPx']))
-    return coords
+            if pixelsize is None:
+                pixelsize = float(r['Spatial_calibration'])
+            else:
+                assert pixelsize == float(r['Spatial_calibration'])
+    return coords, pixelsize
 
 
 def create_roi(colony, coords):
@@ -60,6 +65,17 @@ def save_roi(conn, img, roi):
     log.info(f"Saved Roi for {img.getName()}")
 
 
+def save_pixel_size(conn, img, pixelsize):
+    us = conn.getUpdateService()
+    size = omero.model.LengthI(pixelsize, UnitsLength.MICROMETER)
+    im = conn.getObject('Image', img.id)
+    p = image.getPrimaryPixels()._obj
+    p.setPhysicalSizeX(size)
+    p.setPhysicalSizeY(size)
+    us.saveObject(p)
+    log.info(f"Saved physical size for {img.getName()}")
+
+
 def delete_rois(conn, im):
     result = conn.getRoiService().findByImage(im.id, None)
     to_delete = []
@@ -70,13 +86,15 @@ def delete_rois(conn, im):
         conn.deleteObjects("Roi", to_delete, deleteChildren=True, wait=True)
 
 
-def populate_experiment(conn, experiment):
+def populate_experiment(conn, experiment, dry_run=True):
     currentdir = os.path.dirname(sys.argv[0])
 
     project_name = f"idr0127-baer-phenotypicheterogeneity/{experiment}"
     project = conn.getObject('Project', attributes={'name': project_name})
     for dataset in project.listChildren():
         for image in dataset.listChildren():
+            if not dry_run:
+                delete_rois(conn, image)
             originalpath = image.getImportedImageFilePaths()['client_paths'][0]
             log.debug(f"Looking for CSV associated with {originalpath}")
             csv_file = os.path.basename(
@@ -90,7 +108,15 @@ def populate_experiment(conn, experiment):
                 currentdir, "..", experiment, "features", csv_file)
             if not os.path.exists(csv_path):
                 log.error(f"{csv_path} does not exist")
-            coords = read_csv(csv_path, frame=int(frame))
+            coords, pixelsize = read_csv(csv_path, frame=int(frame))
+
+            if not dry_run:
+                save_physical_size(conn, image, pixelsize)
+
+            for colony, coords in coords.items():
+                roi = create_roi(colony, coords)
+                if not dry_run:
+                    save_roi(conn, image, roi)
 
 def main(argv):
     parser = argparse.ArgumentParser()
@@ -113,27 +139,8 @@ def main(argv):
         conn = omero.gateway.BlitzGateway(client_obj=c.get_client())
         currentdir = os.path.dirname(sys.argv[0])
         for experiment in ["experimentA", "experimentB", "experimentC"]:
-            populate_experiment(conn, experiment)
-        # if len(coords[list(coords.keys())[0]]) > 4:
-        #     # dataset one and three
-        #     image = load_image(conn, imagename, projectid)
-        #     delete_rois(conn, image)
-        #     for colony, coords in coords.items():
-        #         roi = create_roi(colony, coords)
-        #         save_roi(conn, image, roi)
-        # else:
-        #     # dataset two
-        #     images = load_image_2(conn, imagename, projectid)
-        #     for i in images:
-        #         delete_rois(conn, i)
-        #     for colony, coords in coords.items():
-        #         image = None
-        #         for t, x, y, r in coords:
-        #             for img in images:
-        #                 if f"Image0{t}" in img.getName():
-        #                     image = img
-        #             roi = create_roi(colony, [(0, x, y, r)])
-        #             save_roi(conn, image, roi)
+            populate_experiment(conn, experiment, dry_run=args.dry_run)
+
 
 if __name__ == "__main__":
     main(sys.argv[1:])
