@@ -16,13 +16,15 @@ import re
 
 log = logging.getLogger()
 
-def read_csv(filename):
+def read_csv(filename, frame=-1):
     coords = defaultdict(list)
     with open(filename, mode='r') as csv_file:
         csv_reader = csv.DictReader(csv_file)
         rows = list(csv_reader)
         for r in rows:
-            coords[r['Colony']].append((r['Frame'],r['X_centerPx'],r['Y_centerPx'],r['RadiusPx']))
+            if frame !=-1 && frame == r['Frame']:
+            coords[r['Colony']].append(
+                (r['Frame'],r['X_centerPx'],r['Y_centerPx'],r['RadiusPx']))
     return coords
 
 
@@ -55,7 +57,7 @@ def save_roi(conn, img, roi):
     im = conn.getObject('Image', img.id)
     roi.setImage(im._obj)
     us.saveAndReturnObject(roi)
-    print(f"Saved Roi for {img.getName()}")
+    log.info(f"Saved Roi for {img.getName()}")
 
 
 def delete_rois(conn, im):
@@ -79,11 +81,16 @@ def populate_experiment(conn, experiment):
             log.debug(f"Looking for CSV associated with {originalpath}")
             csv_file = os.path.basename(
                 originalpath.replace(".ome.tiff", ".csv"))
+            # Frames of images are split into separate images
+            frame = -1
+            if experiment == "experimentB":
+                frame = image.getName()[-2:]
+                csv_file = csv_file.replace(f"_Image{frame}", "")
             csv_path = os.path.join(
                 currentdir, "..", experiment, "features", csv_file)
             if not os.path.exists(csv_path):
                 log.error(f"{csv_path} does not exist")
-            coords = read_csv(csv_path)
+            coords = read_csv(csv_path, frame=int(frame))
 
 def main(argv):
     parser = argparse.ArgumentParser()
