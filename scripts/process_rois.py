@@ -25,7 +25,7 @@ def read_csv(filename, frame=-1):
         csv_reader = csv.DictReader(csv_file)
         rows = list(csv_reader)
         for r in rows:
-            if frame !=-1 and frame != r['Frame']:
+            if frame !=-1 and frame != int(r['Frame']):
                 continue
             coords[r['Colony']].append(
                 (r['Frame'],r['X_centerPx'],r['Y_centerPx'],r['RadiusPx']))
@@ -108,7 +108,7 @@ def populate_experiment(conn, experiment, dry_run=True):
                 log.error(f"{csv_path} does not exist")
             coords, pixelsize = read_csv(csv_path, frame=int(frame))
 
-            if not math.isnan(pixelsize):
+            if pixelsize is not None and not math.isnan(pixelsize):
                 save_pixel_size(conn, image, pixelsize)
 
             rois= []
