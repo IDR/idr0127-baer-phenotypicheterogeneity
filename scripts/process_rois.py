@@ -5,6 +5,7 @@ import omero
 import omero.cli
 from omero.gateway import BlitzGateway
 from omero.rtypes import rdouble, rstring, rint
+import os.path
 from collections import defaultdict
 import re
 
@@ -90,6 +91,23 @@ def delete_rois(conn, im):
         print(f"Deleting existing {len(to_delete)} rois on image {im.name}.")
         conn.deleteObjects("Roi", to_delete, deleteChildren=True, wait=True)
 
+
+def populate_experiment(conn, experiment):
+
+    project_name = f"idr0127-baer-phenotypicheterogeneity/{experiment}"
+    project = conn.getObject('Project', attributes={'name': project_name})
+    for dataset in project.listChildren():
+        for image in dataset.listChildren():
+            originalpath = image.getImportedImageFilePaths()[0]
+            log.error(f"Looking for CSV associated with {originalpath}")
+            csv_file = os.path.basename(
+                originalpath.replace(".ome.tiff", ".csv"))
+            csv_path = os.path.join(
+                currentdir, experiment, "features", csv_file)
+            if not os.path.exists(csv_path):
+                log.error(f"{csv_path} does not exist")
+            coords = read_csv(csv_path)
+
 def main(argv):
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -101,10 +119,6 @@ def main(argv):
     parser.add_argument(
         '--dry-run', '-n', action='store_true',
         help='Run command in dry-run mode')
-    parser.add_argument(
-        'filename', type=str, help='CSV file containing ROIs')
-    parser.add_argument(
-        'projectid', type=int, help='ID of the project to annotate')
     args = parser.parse_args(argv)
 
     imagename = re.search(".+/(?P<basename>.+)\.csv", args.filename).group('basename') + ".ome.tiff"
@@ -116,27 +130,29 @@ def main(argv):
 
     with omero.cli.cli_login() as c:
         conn = omero.gateway.BlitzGateway(client_obj=c.get_client())
-        coords = read_csv(args.filename)
-        if len(coords[list(coords.keys())[0]]) > 4:
-            # dataset one and three
-            image = load_image(conn, imagename, projectid)
-            delete_rois(conn, image)
-            for colony, coords in coords.items():
-                roi = create_roi(colony, coords)
-                save_roi(conn, image, roi)
-        else:
-            # dataset two
-            images = load_image_2(conn, imagename, projectid)
-            for i in images:
-                delete_rois(conn, i)
-            for colony, coords in coords.items():
-                image = None
-                for t, x, y, r in coords:
-                    for img in images:
-                        if f"Image0{t}" in img.getName():
-                            image = img
-                    roi = create_roi(colony, [(0, x, y, r)])
-                    save_roi(conn, image, roi)
+        currentdir = os.path.dirname(sys.argv[0])
+        for experiment in ["experimentA", "experimentB", "experimentC"]
+            populate_experiment(conn, experiment)
+        # if len(coords[list(coords.keys())[0]]) > 4:
+        #     # dataset one and three
+        #     image = load_image(conn, imagename, projectid)
+        #     delete_rois(conn, image)
+        #     for colony, coords in coords.items():
+        #         roi = create_roi(colony, coords)
+        #         save_roi(conn, image, roi)
+        # else:
+        #     # dataset two
+        #     images = load_image_2(conn, imagename, projectid)
+        #     for i in images:
+        #         delete_rois(conn, i)
+        #     for colony, coords in coords.items():
+        #         image = None
+        #         for t, x, y, r in coords:
+        #             for img in images:
+        #                 if f"Image0{t}" in img.getName():
+        #                     image = img
+        #             roi = create_roi(colony, [(0, x, y, r)])
+        #             save_roi(conn, image, roi)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
