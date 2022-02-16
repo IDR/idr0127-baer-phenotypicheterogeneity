@@ -26,31 +26,6 @@ def read_csv(filename):
     return coords
 
 
-def load_image(conn, imagename, projectid):
-    # for dataset one and three
-    project = conn.getObject('Project', attributes={'id': projectid})
-    for dataset in project.listChildren():
-        for image in dataset.listChildren():
-            if image.getName() == imagename:
-                return image
-    print(f"Could not find image {imagename}")
-    exit(1)
-
-
-def load_image_2(conn, imagename, projectid):
-    # for the second dataset only
-    images = []
-    project = conn.getObject('Project', attributes={'id': projectid})
-    for dataset in project.listChildren():
-        for image in dataset.listChildren():
-            if imagename.replace(".ome.tiff", "") in image.getName():
-                images.append(image)
-    if not images:
-        print(f"Could not find the images for {imagename}")
-        exit(1)
-    return images
-
-
 def create_roi(colony, coords):
     roi = omero.model.RoiI()
     for t, x, y, r in coords:
@@ -89,7 +64,7 @@ def delete_rois(conn, im):
     for roi in result.rois:
         to_delete.append(roi.getId().getValue())
     if to_delete:
-        print(f"Deleting existing {len(to_delete)} rois on image {im.name}.")
+        log.info(f"Deleting existing {len(to_delete)} rois on image {im.name}.")
         conn.deleteObjects("Roi", to_delete, deleteChildren=True, wait=True)
 
 
