@@ -1,3 +1,4 @@
+import argparse
 import sys
 import csv
 import omero
@@ -11,18 +12,9 @@ import re
 # Run it like this:
 # find /uod/idr/metadata/idr0127-baer-phenotypicheterogeneity/FeatureLevelData -type f -exec python process_rois.py [PROJECT_ID] {} \;
 
-if len(sys.argv) < 2:
-    print("Usage: python process_rois.py [PROJECT_ID] [CSV_FILE]")
-    exit(1)
 
 
-filename = sys.argv[2]
-
-imagename = re.search(".+/(?P<basename>.+)\.csv", filename).group('basename') + ".ome.tiff"
-projectid = int(sys.argv[1])
-
-
-def read_csv():
+def read_csv(filename):
     coords = defaultdict(list)
     with open(filename, mode='r') as csv_file:
         csv_reader = csv.DictReader(csv_file)
@@ -32,7 +24,7 @@ def read_csv():
     return coords
 
 
-def load_image(conn):
+def load_image(conn, imagename, projectid):
     # for dataset one and three
     project = conn.getObject('Project', attributes={'id': projectid})
     for dataset in project.listChildren():
@@ -43,7 +35,7 @@ def load_image(conn):
     exit(1)
 
 
-def load_image_2(conn):
+def load_image_2(conn, imagename, projectid):
     # for the second dataset only
     images = []
     project = conn.getObject('Project', attributes={'id': projectid})
@@ -98,27 +90,53 @@ def delete_rois(conn, im):
         print(f"Deleting existing {len(to_delete)} rois on image {im.name}.")
         conn.deleteObjects("Roi", to_delete, deleteChildren=True, wait=True)
 
+def main(argv):
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--verbose', '-v', action='count', default=0,
+        help='Increase the command verbosity')
+    parser.add_argument(
+        '--quiet', '-q', action='count', default=0,
+        help='Decrease the command verbosity')
+    parser.add_argument(
+        '--dry-run', '-n', action='store_true',
+        help='Run command in dry-run mode')
+    parser.add_argument(
+        'filename', type=str, help='CSV file containing ROIs')
+    parser.add_argument(
+        'projectid', type=int, help='ID of the project to annotate')
+    args = parser.parse_args(argv)
 
-with omero.cli.cli_login() as c:
-    conn = omero.gateway.BlitzGateway(client_obj=c.get_client())
-    coords = read_csv()
-    if len(coords[list(coords.keys())[0]]) > 4:
-        # dataset one and three
-        image = load_image(conn)
-        delete_rois(conn, image)
-        for colony, coords in coords.items():
-            roi = create_roi(colony, coords)
-            save_roi(conn, image, roi)
-    else:
-        # dataset two
-        images = load_image_2(conn)
-        for i in images:
-            delete_rois(conn, i)
-        for colony, coords in coords.items():
-            image = None
-            for t, x, y, r in coords:
-                for img in images:
-                    if f"Image0{t}" in img.getName():
-                        image = img
-                roi = create_roi(colony, [(0, x, y, r)])
+    imagename = re.search(".+/(?P<basename>.+)\.csv", args.filename).group('basename') + ".ome.tiff"
+    projectid = int(args.projectid)
+    log = logging.getLogger()
+
+    default_level = logging.INFO - 10 * args.verbose + 10 * args.quiet
+    logging.basicConfig(level=default_level)
+
+    with omero.cli.cli_login() as c:
+        conn = omero.gateway.BlitzGateway(client_obj=c.get_client())
+        coords = read_csv(args.filename)
+        if len(coords[list(coords.keys())[0]]) > 4:
+            # dataset one and three
+            image = load_image(conn, imagename, projectid)
+            delete_rois(conn, image)
+            for colony, coords in coords.items():
+                roi = create_roi(colony, coords)
                 save_roi(conn, image, roi)
+        else:
+            # dataset two
+            images = load_image_2(conn, imagename, projectid)
+            for i in images:
+                delete_rois(conn, i)
+            for colony, coords in coords.items():
+                image = None
+                for t, x, y, r in coords:
+                    for img in images:
+                        if f"Image0{t}" in img.getName():
+                            image = img
+                    roi = create_roi(colony, [(0, x, y, r)])
+                    save_roi(conn, image, roi)
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
