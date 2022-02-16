@@ -63,14 +63,6 @@ def create_roi(colony, coords):
     return roi
 
 
-def save_roi(conn, img, roi):
-    us = conn.getUpdateService()
-    im = conn.getObject('Image', img.id)
-    roi.setImage(im._obj)
-    us.saveAndReturnObject(roi)
-    log.info(f"Saved Roi for {img.getName()}")
-
-
 def save_pixel_size(conn, img, pixelsize):
     us = conn.getUpdateService()
     size = omero.model.LengthI(pixelsize, UnitsLength.MICROMETER)
@@ -119,10 +111,14 @@ def populate_experiment(conn, experiment, dry_run=True):
             if not math.isnan(pixelsize):
                 save_pixel_size(conn, image, pixelsize)
 
+            rois= []
             for colony, coords in coords.items():
                 roi = create_roi(colony, coords)
-                if not dry_run:
-                    save_roi(conn, image, roi)
+                roi.setImage(image._obj)
+                rois.append(roi)
+            if not dry_run:
+                conn.getUpdateService.saveArray(rois)
+                log.info(f"Saved {len(rois)} ROIs for {image.getName()}")
 
 def main(argv):
     parser = argparse.ArgumentParser()
