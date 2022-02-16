@@ -31,7 +31,7 @@ def read_csv(filename, frame=-1):
             if pixelsize is None:
                 pixelsize = float(r['Spatial_calibration'])
             else:
-                if math.isnan(r['Spatial_calibration']):
+                if math.isnan(float(r['Spatial_calibration'])):
                     assert math.isnan(pixelsize)
                 else:
                     assert pixelsize == float(r['Spatial_calibration'])
