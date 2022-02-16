@@ -2,8 +2,10 @@ import argparse
 import sys
 import csv
 import logging
+import math
 import omero
 import omero.cli
+from omero.model.enums import UnitsLength
 from omero.gateway import BlitzGateway
 from omero.rtypes import rdouble, rstring, rint
 import os.path
@@ -29,7 +31,10 @@ def read_csv(filename, frame=-1):
             if pixelsize is None:
                 pixelsize = float(r['Spatial_calibration'])
             else:
-                assert pixelsize == float(r['Spatial_calibration'])
+                if math.isnan(r['Spatial_calibration']):
+                    assert math.isnan(pixelsize)
+                else:
+                    assert pixelsize == float(r['Spatial_calibration'])
     return coords, pixelsize
 
 
@@ -69,11 +74,11 @@ def save_pixel_size(conn, img, pixelsize):
     us = conn.getUpdateService()
     size = omero.model.LengthI(pixelsize, UnitsLength.MICROMETER)
     im = conn.getObject('Image', img.id)
-    p = image.getPrimaryPixels()._obj
+    p = im.getPrimaryPixels()._obj
     p.setPhysicalSizeX(size)
     p.setPhysicalSizeY(size)
     us.saveObject(p)
-    log.info(f"Saved physical size for {img.getName()}")
+    log.info(f"Saved physical size for {im.getName()}")
 
 
 def delete_rois(conn, im):
@@ -110,8 +115,8 @@ def populate_experiment(conn, experiment, dry_run=True):
                 log.error(f"{csv_path} does not exist")
             coords, pixelsize = read_csv(csv_path, frame=int(frame))
 
-            if not dry_run:
-                save_physical_size(conn, image, pixelsize)
+            if not math.isnan(pixelsize):
+                save_pixel_size(conn, image, pixelsize)
 
             for colony, coords in coords.items():
                 roi = create_roi(colony, coords)
