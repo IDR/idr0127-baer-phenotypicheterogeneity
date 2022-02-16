@@ -117,7 +117,7 @@ def populate_experiment(conn, experiment, dry_run=True):
                 roi.setImage(image._obj)
                 rois.append(roi)
             if not dry_run:
-                conn.getUpdateService.saveArray(rois)
+                conn.getUpdateService().saveArray(rois)
                 log.info(f"Saved {len(rois)} ROIs for {image.getName()}")
 
 def main(argv):
