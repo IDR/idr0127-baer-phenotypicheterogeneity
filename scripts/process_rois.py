@@ -1,6 +1,7 @@
 import argparse
 import sys
 import csv
+import logging
 import omero
 import omero.cli
 from omero.gateway import BlitzGateway
@@ -13,7 +14,7 @@ import re
 # Run it like this:
 # find /uod/idr/metadata/idr0127-baer-phenotypicheterogeneity/FeatureLevelData -type f -exec python process_rois.py [PROJECT_ID] {} \;
 
-
+log = logging.getLogger()
 
 def read_csv(filename):
     coords = defaultdict(list)
@@ -93,17 +94,18 @@ def delete_rois(conn, im):
 
 
 def populate_experiment(conn, experiment):
+    currentdir = os.path.dirname(sys.argv[0])
 
     project_name = f"idr0127-baer-phenotypicheterogeneity/{experiment}"
     project = conn.getObject('Project', attributes={'name': project_name})
     for dataset in project.listChildren():
         for image in dataset.listChildren():
-            originalpath = image.getImportedImageFilePaths()[0]
-            log.error(f"Looking for CSV associated with {originalpath}")
+            originalpath = image.getImportedImageFilePaths()['client_paths'][0]
+            log.debug(f"Looking for CSV associated with {originalpath}")
             csv_file = os.path.basename(
                 originalpath.replace(".ome.tiff", ".csv"))
             csv_path = os.path.join(
-                currentdir, experiment, "features", csv_file)
+                currentdir, "..", experiment, "features", csv_file)
             if not os.path.exists(csv_path):
                 log.error(f"{csv_path} does not exist")
             coords = read_csv(csv_path)
@@ -121,9 +123,6 @@ def main(argv):
         help='Run command in dry-run mode')
     args = parser.parse_args(argv)
 
-    imagename = re.search(".+/(?P<basename>.+)\.csv", args.filename).group('basename') + ".ome.tiff"
-    projectid = int(args.projectid)
-    log = logging.getLogger()
 
     default_level = logging.INFO - 10 * args.verbose + 10 * args.quiet
     logging.basicConfig(level=default_level)
@@ -131,7 +130,7 @@ def main(argv):
     with omero.cli.cli_login() as c:
         conn = omero.gateway.BlitzGateway(client_obj=c.get_client())
         currentdir = os.path.dirname(sys.argv[0])
-        for experiment in ["experimentA", "experimentB", "experimentC"]
+        for experiment in ["experimentA", "experimentB", "experimentC"]:
             populate_experiment(conn, experiment)
         # if len(coords[list(coords.keys())[0]]) > 4:
         #     # dataset one and three
