@@ -27,8 +27,12 @@ def read_csv(filename, frame=-1):
         for r in rows:
             if frame !=-1 and frame != int(r['Frame']):
                 continue
-            coords[r['Colony']].append(
-                (r['Frame'],r['X_centerPx'],r['Y_centerPx'],r['RadiusPx']))
+            if frame == int(r['Frame']):
+                coords[r['Colony']].append(
+                    (0,r['X_centerPx'],r['Y_centerPx'],r['RadiusPx']))
+            else:
+                coords[r['Colony']].append(
+                    (r['Frame'],r['X_centerPx'],r['Y_centerPx'],r['RadiusPx']))
             if pixelsize is None:
                 pixelsize = float(r['Spatial_calibration'])
             else:
