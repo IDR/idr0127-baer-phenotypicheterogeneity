@@ -131,6 +131,13 @@ def main(argv):
     parser.add_argument(
         '--dry-run', '-n', action='store_true',
         help='Run command in dry-run mode')
+    parser.add_argument(
+        '--dry-run', '-n', action='store_true',
+        help='Run command in dry-run mode')
+    parser.add_argument(
+        'experiment', type=str, nargs='*',
+        default=["experimentA", "experimentB", "experimentC"],
+        help='Experiments to process')
     args = parser.parse_args(argv)
 
 
@@ -140,7 +147,7 @@ def main(argv):
     with omero.cli.cli_login() as c:
         conn = omero.gateway.BlitzGateway(client_obj=c.get_client())
         currentdir = os.path.dirname(sys.argv[0])
-        for experiment in ["experimentA", "experimentB", "experimentC"]:
+        for experiment in args.experiment:
             populate_experiment(conn, experiment, dry_run=args.dry_run)
 
 
