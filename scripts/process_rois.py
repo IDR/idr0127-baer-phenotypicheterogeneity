@@ -136,9 +136,6 @@ def main(argv):
         '--dry-run', '-n', action='store_true',
         help='Run command in dry-run mode')
     parser.add_argument(
-        '--dry-run', '-n', action='store_true',
-        help='Run command in dry-run mode')
-    parser.add_argument(
         'experiment', type=str, nargs='*',
         default=["experimentA", "experimentB", "experimentC"],
         help='Experiments to process')
