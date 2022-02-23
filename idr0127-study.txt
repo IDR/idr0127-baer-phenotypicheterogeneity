@@ -1,0 +1,316 @@
+# FILL IN AS MUCH INFORMATION AS YOU CAN.  HINTS HAVE BEEN PUT IN SOME FIELDS AFTER THE HASH # SYMBOL. REPLACE THE HINT WITH TEXT WHERE APPROPRIATE.	
+# STUDY DESCRIPTION SECTION				
+# Section with generic information about the study including title, description, publication details (if applicable) and contact details				
+				
+Comment[IDR Study Accession]	idr0127			
+Study Title	Quantification of within patient Staphylococcus aureus phenotypic heterogeneity as a proxy for presence of persisters across clinical presentations			
+Study Type	time-lapse imaging			
+Study Type Term Source REF	OMIT			
+Study Type Term Accession	OMIT_0027490			
+Study Description	Staphylococcus aureus was isolated from patients suffering cardiovascular, prosthetic joint or other infections and plated on Columbia sheep blood agar. Macroscopic time-lapse imaging was performed to quantify colony appearance-time and growth-rate. As a baseline reference, the same time-lapse imaging protocol was used after subculturing clinical isolates in tryptic soy broth until bacteria reached exponential growth phase.	
+Study Key Words	Staphylococcus aureus	antibiotic tolerance	phenotypic heterogeneity	biofilm	rifampicin			
+Study Organism	Staphylococcus aureus			
+Study Organism Term Source REF	NCBITaxon			
+Study Organism Term Accession	1280			
+Study Experiments Number	3			
+Study External URL	
+Study BioImage Archive Accession			
+Study Public Release Date	2022-02-28			
+				
+# Study Publication				
+Study PubMed ID				
+Study Publication Title	Quantification of within patient Staphylococcus aureus phenotypic heterogeneity as a proxy for presence of persisters across clinical presentations		
+Study Author List	Baer J, Boumasmoud M, Shambat SM, Vulin C, Huemer M, Schweizer TA, Gomez-Mejia A, Eberhard N, Achermann Y, Zingg PO, Mestres CA, Brugger SD, Schuepbach RA, Kouyos RD, Hasse B, Zinkernagel AS			
+Study PMC ID				
+Study DOI				
+				
+# Study Contacts				
+Study Person Last Name	Baer			
+Study Person First Name	Julian			
+Study Person Email	julian.baer@usz.ch			
+Study Person Address	Raemistrasse 100, 8091 Zurich, Switzerland			
+Study Person ORCID	0000-0003-1929-0338 			
+Study Person Roles	submitter		
+				
+# Study License and Data DOI				
+Study License	CC BY 4.0			
+Study License URL	https://creativecommons.org/licenses/by/4.0/			
+Study Copyright	Baer et al			
+Study Data Publisher	University of Dundee			
+Study Data DOI				
+				
+Term Source Name	NCBITaxon	EFO	CMPO	FBbi
+Term Source URI	http://purl.obolibrary.org/obo/	http://www.ebi.ac.uk/efo/	http://www.ebi.ac.uk/cmpo/	http://purl.obolibrary.org/obo/
+				
+				
+# EXPERIMENT SECTION				
+# Experiment Section containing all information relative to each experiment in the study including materials used, protocols names and description, phenotype names and description. For multiple experiments this section should be repeated.  Copy and paste the whole section below and fill out for the next experiment				
+				
+Experiment Number	1			
+Comment[IDR Experiment Name]	idr0127-baer-phenotypicheterogeneity/experimentA
+Experiment Sample Type	cell	
+Experiment Description	Bacteria were directly isolated from patient material and then spread-plated on Columbia Sheep Blood agar plates. Folder 1 contains time-lapse imaged samples.			
+Experiment Size	5D Images: 	Average Image Dimension (XYZCT):	Total Tb:  
+Experiment Example Images	1_Patient_TL\CI1564_patient_TL\IMG_0216.jpg			
+Experiment Imaging Method	macroscopy  			
+Experiment Imaging Method Term Source REF	Fbbi			
+Experiment Imaging Method Term Accession	FBbi_00000240			
+Experiment Organism			
+Experiment Organism Term Source REF	NCBITaxon			
+Experiment Organism Term Accession				
+Experiment Comments	Macroscopic time-lapse imaging (delta=10min) acquired with either a Canon EOS 1200D (RGB images, only G channel uploaded) or a Basler acA5472-17um 20MP camera with a Fujinon Objective CF16ZA-1S 16 mm/1.8M37.5 A-0.5 (grayscale images).  
+
+				
+# assay files				
+Experiment Assay File	idr0127-experimentA-annotation			
+Experiment Assay File Format	tab-delimited text			
+Assay Experimental Conditions	Grow bacteria on Columbia Sheep Agar plates, lid closed, upside-up, incubated at 37°C.			
+Assay Experimental Conditions Term Source REF				
+Assay Experimental Conditions Term Accession				
+Quality Control Description	Species identity confirmed either by routine diagnostics or MALDI-TOF (Brukker).	
+		
+				
+# Protocols				
+Protocol Name	growth protocol	treatment protocol	image acquisition and feature extraction protocol	data analysis protocol
+Protocol Type	growth protocol	treatment protocol	image acquisition and feature extraction protocol	data analysis protocol
+Protocol Type Term Source REF	EFO	EFO		
+Protocol Type Term Accession				
+Protocol Description	To monitor growth of bacterial colonies, Columbia Sheep Blood agar plates were incubated at 37° C directly upon isolation from patient material imaged automatically every ten minutes Canon EOS 1200D (raw RGB images, only G channel uploaded) or a Basler acA5472-17um 20MP camera with a Fujinon Objective CF16ZA-1S 16 mm/1.8M37.5 A-0.5 (grayscale images).	Analysed with ColTapp (https://doi.org/10.1038/s41598-020-72979-4).
+
+				
+# Phenotypes				
+Phenotype Name	Bacterial colony size			
+Phenotype Description	Bacterial colony radius in micrometers monitored over time to derive appearance time and radial growth rate with ColTapp.			
+Phenotype Score Type	automatic			
+Phenotype Term Source REF	CMPO			
+Phenotype Term Name				
+Phenotype Term Accession			 	
+				
+				
+# Feature Level Data Files (give individual file details unless there is one file per well)				
+Feature Level Data File Name	
+CI1140_patient_TL.csv
+CI1150_patient_TL.csv
+CI1280_patient_TL.csv
+CI1314_patient_TL.csv
+CI1368_patient_TL.csv
+CI1373_patient_TL.csv
+CI1375_patient_TL.csv
+CI1379_patient_TL.csv
+CI1390_patient_TL.csv
+CI1418_patient_TL.csv
+CI1424_patient_TL.csv
+CI1439_patient_TL.csv
+CI1442_patient_TL.csv
+CI1475_patient_TL.csv
+CI1491_patient_TL.csv
+CI1502_patient_TL.csv
+CI1523_patient_TL.csv
+CI1564_patient_TL.csv
+CI1733_patient_TL.csv
+CI2270_patient_TL.csv
+CI2272_patient_TL.csv
+CI2278_patient_TL.csv
+CI2293_patient_TL.csv
+CI2298_patient_TL.csv
+CI5039_patient_TL.csv
+CI5052_patient_TL.csv
+CI5055_patient_TL.csv
+
+			
+Feature Level Data File Format	csv			
+Feature Level Data File Description	One csv file per .tiff stack (one stack per clinical isolate). Each contains data per colony and frame.					
+Feature Level Data Column Name	CI Identifier	Condition	Imaging_method	Colony	X_CenterPx	Y_CenterPx	X_CenterUm	Y_CenterUm	RadiusPx	RadiusUm	Frame	Time						
+Feature Level Data Column Description	Clinical isolate ID	Patient sample or Exponential regrowth culture	Imaging method (timelapse, TL or endpoint, EP)	Colony ID number	Colony center X position	Colony center Y position	Radius in pixel	Radius in micrometers	Frame number	Time in hours	
+		
+				
+#  Processed Data Files 				
+Processed Data File Name	idr0127-experimentA-processed.txt		
+Processed Data File Format	tab-delimited text file			
+Processed Data File Description	Part of Fig1D data. Calculated linear radial growth rate, appearance time (200um size threshold) and growth delay (appearance time of colony minus median appearance time of exponential culture) per colony for both time-lapse (experiment1) and endpoint (experiment2) images. Clinical data shown in Fig 1D is also included (type of infection and antibiotics).			
+Processed Data Column Name	CI Identifier	Growth-rate	Radius	Appearance_time	Growth-delay	Imaging_method	Category	DAP	GEN	RIF	Other_ABX			
+Processed Data Column Type	data	data	data	data	data	data	data	data	data	data	data			
+Processed Data Column Annotation Level	clinical isolate ID	colony/time-lapse	colony/24h image	colony/time-lapse	colony/time-lapse	time-lapse	clinical isolate ID	clinical isolate ID	clinical isolate ID	clinical isolate ID	clinical isolate ID			
+Processed Data Column Description	Clinical isolate identifier	Radial growth rate per colony calculated by linear interpolatation	Appearance time (corrected 200um size threshold) per colony	Colony appearance time minus median reference (exponential) appearance time	Either time-lapse (TL) or endpoint (EP)	Clinical infection category (CVI=cardiovascular, PJI=prosthetic joint)	Daptomycin treatment of patient	Gentamicin treatment of patient	Rifampicin treatment of patient	Treatment with any other antibiotic of patient		
+Processed Data Column Link To Assay File	CI Identifier			
+
+
+Experiment Number	2			
+Comment[IDR Experiment Name]	idr0127-baer-phenotypicheterogeneity/experimentB
+Experiment Sample Type	cell			
+Experiment Description	Bacteria were directly isolated from patient material and then spread-plated on Columbia Sheep Blood agar plates. Folder 2 contains endpoint (single isolated timepoint, usually 24h and 48h) imaged samples.			
+Experiment Size	5D Images: 	Average Image Dimension (XYZCT):	Total Tb: 	
+Experiment Example Images			
+Experiment Imaging Method	macroscopy	
+Experiment Imaging Method Term Source REF	Fbbi			
+Experiment Imaging Method Term Accession	FBbi_00000240			
+Experiment Organism			
+Experiment Organism Term Source REF	NCBITaxon			
+Experiment Organism Term Accession				
+Experiment Comments	Macroscopic images acquired with Canon EOS 1200D (RGB images, only G channel uploaded). 		
+			
+				
+# assay files				
+Experiment Assay File	idr0127-experimentB-annotation			
+Experiment Assay File Format	tab-delimited textfile			
+Assay Experimental Conditions	Grow bacteria on Columbia Sheep Agar plates, lid closed, upside-down, incubated at 37°C. Remove lid at indicated timepoint and manually acquire an image.			
+Assay Experimental Conditions Term Source REF				
+Assay Experimental Conditions Term Accession				
+Quality Control Description	Species identity confirmed either by routine diagnostics or MALDI-TOF (Brukker).  
+			
+				
+# Protocols				
+Protocol Name	growth protocol	treatment protocol	image acquisition and feature extraction protocol	data analysis protocol
+Protocol Type	growth protocol	treatment protocol	image acquisition and feature extraction protocol	data analysis protocol
+Protocol Type Term Source REF	EFO	EFO		
+Protocol Type Term Accession				
+Protocol Description	To monitor growth of bacterial colonies, Columbia Sheep Blood agar plates were incubated at 37° C directly upon isolation from patient material and images were manually acquired with a Canon EOS 1200D (raw RGB images, only G channel uploaded).	Analysed with ColTapp (https://doi.org/10.1038/s41598-020-72979-4).  
+
+				
+# Phenotypes				
+Phenotype Name	Bacterial colony size			
+Phenotype Description	Bacterial colony radius in micrometers monitored over time to derive appearance time.			
+Phenotype Score Type	automatic			
+Phenotype Term Source REF	CMPO			
+Phenotype Term Name				
+Phenotype Term Accession			 	
+				
+				
+# Feature Level Data Files (give individual file details unless there is one file per well)				
+Feature Level Data File Name	
+CI1374_patient_EP_24h.csv
+CI1374_patient_EP_48h.csv
+CI1378_patient_EP_24h.csv
+CI1378_patient_EP_48h.csv
+CI1380_patient_EP_24h.csv
+CI1380_patient_EP_48h.csv
+CI1464_patient_EP_24h.csv
+CI1464_patient_EP_48h.csv
+CI1466_patient_EP_24h.csv
+CI1466_patient_EP_48h.csv
+CI1466_patient_EP_72h.csv
+CI1497_patient_EP_24h.csv
+CI1497_patient_EP_50h.csv
+CI1706_patient_EP_24h.csv
+CI1706_patient_EP_48h.csv
+CI1794_patient_EP_25.5h.csv
+CI1794_patient_EP_48h.csv
+CI1799_patient_EP_26h.csv
+CI1799_patient_EP_50.5h.csv
+
+
+			
+Feature Level Data File Format	csv			
+Feature Level Data File Description	One csv file per .tiff stack (one stack per clinical isolate). Each contains data per colony and frame.			
+Feature Level Data Column Name	CI Identifier	Condition	Imaging_method	Colony	X_CenterPx	Y_CenterPx	X_CenterUm	Y_CenterUm	RadiusPx	RadiusUm	Spatial_calibration	Frame	Timepoint																				
+Feature Level Data Column Description	Clinical isolate ID	Patient sample or Exponential regrowth culture	Imaging method (timelapse, TL or endpoint, EP)	Colony ID number	Colony center X position	Colony center Y position	Radius in pixel	Radius in micrometers	Pixel to micrometer conversion rate	Frame number	Time in hours	
+		
+				
+#  Processed Data Files 				
+Processed Data File Name	idr0127-experimentB-processed.txt			
+Processed Data File Format	tab-delimited textfile			
+Processed Data File Description	Calculated linear radial growth rate, appearance time (200um size threshold) and growth delay (appearance time of colony minus median appearance time of exponential culture) per colony for both time-lapse (experiment1) and endpoint (experiment2) images. Clinical data shown in Fig 1D is also included (type of infection and antibiotics). 		
+Processed Data Column Name	CI Identifier	Growth-rate	Radius	Appearance_time	Growth-delay	Imaging_method	Category	DAP	GEN	RIF	Other_ABX"			
+Processed Data Column Type	data	data	data	data	data	data	data	data	data	data	data			
+Processed Data Column Annotation Level	clinical isolate ID	colony/time-lapse	colony/24h image	colony/time-lapse	colony/time-lapse	time-lapse	clinical isolate ID	clinical isolate ID	clinical isolate ID	clinical isolate ID	clinical isolate ID"			
+Processed Data Column Description	Clinical isolate identifier	Radial growth rate per colony calculated by linear interpolatation	Appearance time (corrected 200um size threshold) per colony	Colony appearance time minus median reference (exponential) appearance time	Either time-lapse (TL) or endpoint (EP)	Clinical infection category (CVI=cardiovascular, PJI=prosthetic joint)	Daptomycin treatment of patient	Gentamicin treatment of patient	Rifampicin treatment of patient	Treatment with any other antibiotic of patient			
+Processed Data Column Link To Assay File	CI Identifier			
+
+
+Experiment Number	3			
+Comment[IDR Experiment Name]	idr0127-baer-phenotypicheterogeneity/experimentC
+Experiment Sample Type	cell			
+Experiment Description	After Experiment A or B, bacteria were stored at -80°C. Bacteria were restreaked on columbia sheep blood agar and single colonies inoculated in tryptic soy broth for overnight growth. These cultures were dilute 1:10 and incubated for 2h. From these exponential cultures, time-lapse imaging was started (Folder 3).			
+Experiment Size	5D Images: 	Average Image Dimension (XYZCT):	Total Tb: 	
+Experiment Example Images	1_Patient_TL\CI1564_patient_TL\IMG_0216.jpg			
+Experiment Imaging Method	macroscopy			
+Experiment Imaging Method Term Source REF	Fbbi			
+Experiment Imaging Method Term Accession	FBbi_00000240			
+Experiment Organism			
+Experiment Organism Term Source REF	NCBITaxon			
+Experiment Organism Term Accession				
+Experiment Comments	Macroscopic time-lapse imaging (delta=10min) acquired with either a Canon EOS 1200D (RGB images, only G channel uploaded) or a Basler acA5472-17um 20MP camera with a Fujinon Objective CF16ZA-1S 16 mm/1.8M37.5 A-0.5 (grayscale images). 
+ 			
+				
+# assay files				
+Experiment Assay File	idr0127-experimentC-annotation			
+Experiment Assay File Format	tab-delimited text			
+Assay Experimental Conditions	Grow bacteria on Columbia Sheep Agar plates, lid closed, upside-up, incubated at 37°C.			
+Assay Experimental Conditions Term Source REF			
+Assay Experimental Conditions Term Accession				
+Quality Control Description	Species identity confirmed either by routine diagnostics or MALDI-TOF (Brukker).
+			
+				
+# Protocols				
+Protocol Name	growth protocol	treatment protocol	image acquisition and feature extraction protocol	data analysis protocol
+Protocol Type	growth protocol	treatment protocol	image acquisition and feature extraction protocol	data analysis protocol
+Protocol Type Term Source REF	EFO	EFO		
+Protocol Type Term Accession				
+Protocol Description	Bacteria were restreaked on columbia sheep blood agar and single colonies inoculated in tryptic soy broth for overnight growth. These cultures were dilute 1:10 and incubated for 2h. From these exponential cultures, time-lapse imaging was started with a Canon EOS 1200D (raw RGB images, only G channel uploaded) or a Basler acA5472-17um 20MP camera with a Fujinon Objective CF16ZA-1S 16 mm/1.8M37.5 A-0.5 (grayscale images).	Analysed with ColTapp (https://doi.org/10.1038/s41598-020-72979-4).
+
+				
+# Phenotypes				
+Phenotype Name	Bacterial colony size			
+Phenotype Description	Bacterial colony radius in micrometers monitored over time to derive appearance time and radial growth rate with ColTapp.  			
+Phenotype Score Type	automatic			
+Phenotype Term Source REF	CMPO			
+Phenotype Term Name				
+Phenotype Term Accession			 	
+				
+				
+# Feature Level Data Files (give individual file details unless there is one file per well)				
+Feature Level Data File Name	
+CI1140_exponential_TL.csv
+CI1150_exponential_TL.csv
+CI1280_exponential_TL.csv
+CI1314_exponential_TL.csv
+CI1368_exponential_TL.csv
+CI1373_exponential_TL.csv
+CI1374_exponential_TL.csv
+CI1375_exponential_TL.csv
+CI1378_exponential_TL.csv
+CI1379_exponential_TL.csv
+CI1380_exponential_TL.csv
+CI1390_exponential_TL.csv
+CI1418_exponential_TL.csv
+CI1424_exponential_TL.csv
+CI1439_exponential_TL.csv
+CI1442_exponential_TL.csv
+CI1464_exponential_TL.csv
+CI1466_exponential_TL.csv
+CI1475_exponential_TL.csv
+CI1491_exponential_TL.csv
+CI1497_exponential_TL.csv
+CI1502_exponential_TL.csv
+CI1523_exponential_TL.csv
+CI1564_exponential_TL.csv
+CI1706_exponential_TL.csv
+CI1733_exponential_TL.csv
+CI1794_exponential_TL.csv
+CI1799_exponential_TL.csv
+CI2270_exponential_TL.csv
+CI2272_exponential_TL.csv
+CI2278_exponential_TL.csv
+CI2293_exponential_TL.csv
+CI2298_exponential_TL.csv
+CI5039_exponential_TL.csv
+CI5052_exponential_TL.csv
+CI5055_exponential_TL.csv
+
+
+			
+Feature Level Data File Format	csv			
+Feature Level Data File Description	One csv file per .tiff stack (one stack per clinical isolate). Each contains data per colony and frame.						
+Feature Level Data Column Name	CI Identifier	Condition	Colony	X_CenterPx	Y_CenterPx	X_CenterUm	Y_CenterUm	RadiusPx	RadiusUm	Spatial_Calibration	Frame	Time																																
+Feature Level Data Column Description	Clinical isolate ID	Patient sample or Exponential regrowth culture	Colony ID number	Colony center X position	Colony center Y position	Radius in pixel	Radius in micrometers	Pixel to micrometer conversion rate	Frame number	Time in hours		
+	
+				
+#  Processed Data Files 				
+Processed Data File Name	idr0127-experimentC-processed.txt			
+Processed Data File Format	tab-delimited textfile			
+Processed Data File Description	Calculated linear radial growth rate, appearance time (200um size threshold) per colony for time-lapse images. These are data are used to calculate reference growth-rate and appearance time per clinical isolate		
+Processed Data Column Name	CI Identifier	Appearance_time	Growth-rate	Radius	Imaging_method			
+Processed Data Column Type	data	data	data	data	data			
+Processed Data Column Annotation Level	clinical isolate ID	colony/time-lapse	colony/time-lapse	colony/24h image	time-lapse			
+Processed Data Column Description	Clinical isolate identifier	Appearance time (corrected 200um size threshold) per colony	Radial growth rate per colony calculated by linear interpolatation	Imaging method (time-lapse TL)	
+Processed Data Column Link To Assay File	CI Identifier			
