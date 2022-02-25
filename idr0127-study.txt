@@ -49,7 +49,7 @@ Term Source URI	http://purl.obolibrary.org/obo/	http://www.ebi.ac.uk/efo/	http:/
 Experiment Number	1			
 Comment[IDR Experiment Name]	idr0127-baer-phenotypicheterogeneity/experimentA
 Experiment Sample Type	cell	
-Experiment Description	Bacteria were directly isolated from patient material and then spread-plated on Columbia Sheep Blood agar plates. Folder 1 contains time-lapse imaged samples.			
+Experiment Description	Bacteria were directly isolated from patient material and then spread-plated on Columbia Sheep Blood agar plates. Samples were time-lapse imaged.			
 Experiment Size	5D Images: 	Average Image Dimension (XYZCT):	Total Tb:  
 Experiment Example Images	1_Patient_TL\CI1564_patient_TL\IMG_0216.jpg			
 Experiment Imaging Method	macroscopy  			
@@ -138,7 +138,7 @@ Processed Data Column Link To Assay File	CI Identifier
 Experiment Number	2			
 Comment[IDR Experiment Name]	idr0127-baer-phenotypicheterogeneity/experimentB
 Experiment Sample Type	cell			
-Experiment Description	Bacteria were directly isolated from patient material and then spread-plated on Columbia Sheep Blood agar plates. Folder 2 contains endpoint (single isolated timepoint, usually 24h and 48h) imaged samples.			
+Experiment Description	Bacteria were directly isolated from patient material and then spread-plated on Columbia Sheep Blood agar plates. Samples were endpoint (single isolated timepoint, usually 24h and 48h) imaged.			
 Experiment Size	5D Images: 	Average Image Dimension (XYZCT):	Total Tb: 	
 Experiment Example Images			
 Experiment Imaging Method	macroscopy	
@@ -220,7 +220,7 @@ Processed Data Column Link To Assay File	CI Identifier
 Experiment Number	3			
 Comment[IDR Experiment Name]	idr0127-baer-phenotypicheterogeneity/experimentC
 Experiment Sample Type	cell			
-Experiment Description	After Experiment A or B, bacteria were stored at -80°C. Bacteria were restreaked on columbia sheep blood agar and single colonies inoculated in tryptic soy broth for overnight growth. These cultures were dilute 1:10 and incubated for 2h. From these exponential cultures, time-lapse imaging was started (Folder 3).			
+Experiment Description	After Experiment A or B, bacteria were stored at -80°C. Bacteria were restreaked on columbia sheep blood agar and single colonies inoculated in tryptic soy broth for overnight growth. These cultures were dilute 1:10 and incubated for 2h. From these exponential cultures, time-lapse imaging was started.			
 Experiment Size	5D Images: 	Average Image Dimension (XYZCT):	Total Tb: 	
 Experiment Example Images	1_Patient_TL\CI1564_patient_TL\IMG_0216.jpg			
 Experiment Imaging Method	macroscopy			
