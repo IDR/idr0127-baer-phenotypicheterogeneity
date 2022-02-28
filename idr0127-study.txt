@@ -18,11 +18,11 @@ Study BioImage Archive Accession
 Study Public Release Date	2022-02-28			
 				
 # Study Publication				
-Study PubMed ID				
+Study PubMed ID	35124264				
 Study Publication Title	Quantification of within patient Staphylococcus aureus phenotypic heterogeneity as a proxy for presence of persisters across clinical presentations		
 Study Author List	Baer J, Boumasmoud M, Shambat SM, Vulin C, Huemer M, Schweizer TA, Gomez-Mejia A, Eberhard N, Achermann Y, Zingg PO, Mestres CA, Brugger SD, Schuepbach RA, Kouyos RD, Hasse B, Zinkernagel AS			
 Study PMC ID				
-Study DOI				
+Study DOI	https://doi.org/10.1016/j.cmi.2022.01.021			
 				
 # Study Contacts				
 Study Person Last Name	Baer			
